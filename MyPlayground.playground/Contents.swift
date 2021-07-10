@@ -119,6 +119,93 @@ var someAnyObject: AnyObject = SomeClas()
 
 
 
+// 06 컬렉션 타입
+// array - 순서 O 리스트 컬렉션
+// dictionary - key-value 쌍으로 이루어진 컬렉션
+// set - 순서가 없고, 멤버가 유일한 컬렉션
+
+var integers: Array<Int>  = Array<Int>() // 빈 배열을 만들고 싶으면 괄호를 비운다.
+integers.append(1)
+integers.append(100)
+integers.append(200)
+//integers.append(99.1)
+
+integers.contains(100)
+integers.contains(99)
+
+integers.remove(at: 1)
+integers.removeLast()
+integers.removeAll()
+
+integers.append(200)
+integers.count
+
+
+// Array<Double> 와 [Double] 는 동일한 표현
+// 빈 Double Array 생성
+var doubles: Array<Double> = [Double]()
+
+// 빈 Character Array 생성
+var characters: [Character] = []
+
+// let 을 사용하여 Array 를 선언하면 불변 Array
+let immutableArray = [1, 2, 3]
+// immutableArray.remove(at: 1) //  불가능
+
+
+// Dictionary
+var anyDictionary: Dictionary<String, Any> = [String: Any]()
+anyDictionary["someKey"] = "value"
+anyDictionary["anotherKey"] = 100
+anyDictionary
+anyDictionary["someKey"] = "anotherValue"
+anyDictionary
+
+// same expression
+anyDictionary.removeValue(forKey: "anotherKey")
+anyDictionary["anotherKey"] = nil
+anyDictionary
+
+
+let emptyDictionary : [String: String] = [:]
+let initalizedDictionary : [String: String] =
+    ["name" : "yagom", "gender": "male"]
+
+
+// 이미 let 으로 선언됐기 때문에 수정 불가
+//emptyDictionary["key"] = "value"
+
+// 딕셔너리의 value 값이 optional 할 수 있기 때문에, ?? 를 붙여준다.
+//let initValue :String = initalizedDictionary["name"]
+let initValue :String?? = initalizedDictionary["name"]
+
+
+
+// swift 가 이렇게 엄격한 타입 캐스팅을 고수하는 이유가 무엇일까
+
+
+// Set
+var integerSet: Set<Int> = Set<Int>()
+integerSet.insert(1)
+integerSet.insert(1)
+integerSet.insert(99)
+integerSet.insert(99)
+
+integerSet
+integerSet.contains(1)
+integerSet.contains(2)
+
+integerSet.remove(1)
+integerSet.removeFirst()
+integerSet.count
+
+let setA: Set<Int> = [1, 2, 3, 4, 5]
+let setB: Set<Int> = [5, 6, 7, 8, 9, 10]
+
+let union: Set<Int> = setA.union(setB) // 합집합
+let sortedUnion: [Int] = union.sorted() // set 을 정렬 (index가 없다) => 배열로 casting 한다 [Int]
+let intersection: Set<Int> = setA.intersection(setB) // 교집합
+let subtracting: Set<Int> = setA.subtracting(setB) // 차집합
 
 
 
