@@ -2,6 +2,11 @@
 
 ### 13. 구조체
 
+> ### 구조체와 클래스
+- 데이터를 용도에 맞게 묶어 표현하고자 할 때 용이한 객체
+- 프로퍼티와 메서드를 사용하여 구조화된 데이터와 기능을 가진다.
+- 사용자만의 새로운 데이터 타입을 만들어 주는 것 (ex. Likelion 구조체, 멤버 프로퍼티, 커리큘럼 프로퍼티, 세션 메서드 등)
+
 ```swift
 타입을 정의하는 역할
 struct 이름{
@@ -30,7 +35,7 @@ struct Sample {
 }
 ```
 
-- 구조체 사용
+- 구조체 사용 : 구조체의 인스턴스는 값 
 
 ```swift
 // 가변 인스턴스
@@ -106,6 +111,8 @@ let immutableRefernce: Sample2 = Sample2()
 mutableRefernce.mutableProperty = 200
 immutableRefernce.mutableProperty = 200
 ```
+
+- 클래스 사용: 클래스 인스턴스는 참조 타입
 
 ```swift
 class Student2 {
