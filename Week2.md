@@ -134,3 +134,131 @@ jina2.name = "jina" // compile 오류 발생, 불변 인스턴스(let) 이기 �
 jina2.selfIntroduce() // 저는 Swift반 jina입니다.
 ```
 
+<hr/>
+
+### 15. 열거형
+
+- 유사한 종류의 여러값을 한 곳에 모아 정의한 자료형(enum 자체가 하나의 데이터 타입)
+
+```swift
+enum Weekday{
+    case mon
+    case tue
+    case wed
+    case thu, fri, sat, sun
+}
+
+var day = Weekday.mon
+day = .tue
+print(day)
+
+
+switch day {
+case .mon, .tue, .wed, .thu:
+    print("weekday")
+default:
+    print("weekend")
+}
+```
+
+##### 열거형 - 원시값
+- rawValue 를 사용하면 된다, case 별로 각각 다른 값을 가져야한다.
+
+```swift
+enum Fruit: Int{
+    case apple = 1
+    case grape // 2
+    case peach // 3
+}
+
+print("\(Fruit.grape.rawValue)")
+```
+
+- 정수 타입뿐만 아니라, hashable 프로토콜을 따르는 모든 타입이 원시값의 타입으로 지정될 수 있다.
+- 숫자와 달리 문자는 예상할 수 없기 때문에, case의 이름 그대로 가져오게 된다.
+
+``` swift
+enum School: String{
+    case elementary = "초등"
+    case university
+}
+
+print("\(School.university)") // university
+```
+
+- rawValue 를 통해 초기화 할 수 있다.
+- rawValue 가 case 에 해당하지 않을 수 있으므로, rawValue 를 통해 초기화 한 인스턴스는 옵셔널 타입이다.
+
+``` swift
+let apple : Fruit? = Fruit(rawValue: 0)
+
+if let orange: Fruit = Fruit(rawValue: 5){
+    print("\(orange)")
+} else{
+    print("해당하는 케이스가 없다.")
+}
+// 해당하는 케이스가 없다.
+```
+
+
+``` swift
+enum Month {
+    case dec, jan, feb
+    case sep, oct, nov
+    
+    func printMsg(){
+        switch self {
+        case .dec, .jan, .feb:
+            print("겨울")
+        case .sep, .oct, .nov:
+            print("가을")
+        }
+    }
+}
+
+
+Month.dec.printMsg() // 겨울
+Month.sep.printMsg() // 가을
+```
+
+### 16.  클래스 vs 구조체 / 열거형
+
+- 클래스 : 단일 상속 , 참조 타입 , apple framework 의 대부분은 클래스로 구성
+- Struct: 상속 불가, 값 타입, swift의 대부분의 큰 뼈대는 구조체로 구성
+- enum : 값 타입, 상속 불가, 열거형 케이스 하나하나 전부 하나의 유의미한 값으로 취급
+
+- 구조체는 언제 사용하나 => 침조가 아닌 복사를 원할 때, 상속 받을 필요가 없을 때.
+- value : data 를 전달할 때 값 을 복사하여 전달
+- reference: data 를 전달할 때 값의 메모리 위치를 전달.
+
+
+```swift
+struct valueType {
+    var property = 1
+}
+
+class referType {
+    var property = 1
+}
+
+let firstSturctInstance = valueType()
+var secondStructInstance = firstSturctInstance
+secondStructInstance.property = 2
+
+
+print("first struct instance propert : \(firstSturctInstance.property)") //1
+print("sec struct instance propert : \(secondStructInstance.property)") //2
+```
+
+```swift
+let firstClassRef = referType()
+var secondClassRef = firstClassRef
+secondClassRef.property = 2
+
+// 참조값이 복사되어 간다.
+print("first class instance propert : \(firstClassRef.property)") //2
+print("sec class instance propert : \(secondClassRef.property)") //2
+```
+- 스위프트는 구조체 , 열거형 사용 선호
+- iOS 프레임워크는 클래스 사용 선호
+
